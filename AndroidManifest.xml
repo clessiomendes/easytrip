@@ -46,7 +46,7 @@
         </activity>
 
         <service
-            android:name="org.open.easytrip.MainService"
+            android:name="org.open.easytrip.service.MainService"
             android:enabled="true" >
         </service>
     </application>

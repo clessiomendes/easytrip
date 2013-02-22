@@ -7,7 +7,6 @@ import java.util.concurrent.TimeUnit;
 
 import org.open.easytrip.AppConstants;
 import org.open.easytrip.AppUtils;
-import org.open.easytrip.MainService;
 import org.open.easytrip.R;
 import org.open.easytrip.bo.AlertBO;
 import org.open.easytrip.bo.BOFactory;
@@ -17,6 +16,7 @@ import org.open.easytrip.entity.LocationBean;
 import org.open.easytrip.entity.ParcelableLocationBean;
 import org.open.easytrip.helper.AlarmControllerHelper;
 import org.open.easytrip.helper.IgnoreListHelper;
+import org.open.easytrip.service.MainService;
 
 import android.annotation.TargetApi;
 import android.app.Activity;

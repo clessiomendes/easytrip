@@ -1,4 +1,7 @@
-package org.open.easytrip;
+package org.open.easytrip.service;
+
+import org.open.easytrip.R;
+import org.open.easytrip.R.raw;
 
 import android.app.Service;
 import android.content.Intent;
