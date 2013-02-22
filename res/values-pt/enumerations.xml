@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="location_type_fixed_speed_camera">radar fixo</string>
+    <string name="location_type_red_light_camera">semáforo com foto</string>
+    <string name="location_type_traffic_light_speed_camera">radar em semáforo</string>
+    <string name="location_type_relocatable_speed_camera">radar móvel</string>
+    <string name="location_type_highway_patrol_station">polícia rodoviária</string>
+    <string name="location_type_speed_bump">redutor de velocidade</string>
+    <string name="locationthers">outros</string>
+
+</resources>

@@ -1,0 +1,13 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head></head>
+<body>
+  Holds the control layer classes, standard Android Activity descending classes. 
+  Interact with visual components (Android views) and the BOs. No business rules should
+  be implemented here, except converting data from the view to the entities before calling
+  BO classes.<br>
+  Some Android specific interactions, like GPS and sound services, are maintained here to 
+  keep BOs apart from the Android environment specific code. Don't dare passing 
+  android.content.Context objects to the business layer.
+</body>
+</html>

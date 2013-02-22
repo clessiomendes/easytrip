@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+<!-- LocationTypeEnum     -->
+    <string name="location_type_fixed_speed_camera">fixed speed camera</string>
+    <string name="location_type_red_light_camera">red light camera</string>
+    <string name="location_type_traffic_light_speed_camera">traffic light speed camera</string>
+    <string name="location_type_relocatable_speed_camera">relocatable speed camera</string>
+    <string name="location_type_highway_patrol_station">highway patrol station</string>
+    <string name="location_type_speed_bump">speed bump</string>
+    <string name="location_type_others">others</string>
+
+<!-- DirectionTypeEnum -->
+    
+    <string name="direction_type_one_direction">one direction</string>
+    <string name="direction_type_both_directions">both directions</string>
+    <string name="direction_type_all_directions">omnidirectional</string>
+    
+</resources>

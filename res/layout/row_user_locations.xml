@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    style="android:button"
+    android:orientation="horizontal"
+    android:padding="10dp" >
+    
+    <!-- android:background="@android:drawable/btn_default" -->
+    
+    <TextView
+        android:id="@+id/txtCreationTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:text="creation"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+<!--     <TextView
+        android:id="@+id/txtType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+ -->
+    <Button
+        android:id="@+id/btnType"
+        android:onClick="rowOnClick"
+        android:text="type"
+        android:paddingLeft="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</TableRow>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--  ============= ATENTION! These resources must not be translated. ==============  -->
+    
+    <string name="preferences_sound_alarm">preferences_sound_alarm</string>
+    <string name="preferences_vibration_alarm">preferences_vibration_alarm</string>
+    <string name="preferences_gps_interval">preferences_gps_interval</string>
+    <string name="preferences_search_radius">preferences_search_radius</string>
+    <string name="preferences_location_types">preferences_location_types</string>
+    <string name="preferences_beep">preferences_beep</string>
+    <string name="preferences_run_in_backgroud">preferences_run_in_backgroud</string>
+    <string name="shared_preferences_las_import_file_size">shared_preferences_las_import_file_size</string>
+
+</resources>

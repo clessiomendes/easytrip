@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/mainLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+        
+        <org.open.easytrip.view.WrapLinearLayout
+            android:id="@+id/flow_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dip" >
+
+            <TextView
+                android:id="@+id/txtLatitude"
+                android:paddingRight="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/latitude_info"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <TextView
+                android:id="@+id/txtLongitude"
+                android:paddingRight="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/longitude_info"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <TextView
+                android:id="@+id/txtBearing"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingRight="3dp"
+                android:text="@string/bearing_info"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <TextView
+                android:id="@+id/txtDirections"
+                android:paddingRight="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/directions_info"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        </org.open.easytrip.view.WrapLinearLayout>
+        
+        <org.open.easytrip.view.WrapRadioGroup
+            android:id="@+id/radioGroupSpeed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:selectAllOnFocus="false"
+                android:text="@string/speed_limit"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                <RadioButton
+                    android:id="@+id/radio60"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:onClick="radioSpeedOnClick"
+                    android:text="60"
+                    android:textSize="40sp" />
+
+                <RadioButton
+                    android:id="@+id/radio70"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:onClick="radioSpeedOnClick"
+                    android:text="70"
+                    android:textSize="40sp" />
+
+                <RadioButton
+                    android:id="@+id/radio80"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical|start|right"
+                    android:onClick="radioSpeedOnClick"
+                    android:text="80"
+                    android:textSize="40sp" />
+
+                <RadioButton
+                    android:id="@+id/radio90"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="radioSpeedOnClick"
+                    android:text="90"
+                    android:textSize="40sp" />
+
+                <RadioButton
+                    android:id="@+id/radio100"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="radioSpeedOnClick"
+                    android:text="100"
+                    android:textSize="40sp" />
+
+                <RadioButton
+                    android:id="@+id/radio110"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="radioSpeedOnClick"
+                    android:text="110"
+                    android:textSize="40sp" />
+
+                <RadioButton
+                    android:id="@+id/radioOther"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="radioOtherOnClick"
+                    android:text="@string/other"
+                    android:textSize="40sp" />
+
+                <!-- Use phone input cuse it shows big numbers to the user -->
+                <EditText
+                    android:inputType="phone"
+                    android:id="@+id/editOther"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="3"
+					android:digits="0123456789"
+					android:textSize="30sp"
+                    android:onClick="editOtherOnClick" >
+                </EditText>
+                
+        </org.open.easytrip.view.WrapRadioGroup>
+
+        <LinearLayout
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal" >
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="btnSaveClick"
+                android:text="@string/save" />
+
+            <Button
+                android:id="@+id/btnDelete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="btnDeleteClick"
+                android:text="@string/delete" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="btnCancelClick"
+                android:text="@string/cancel" />
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

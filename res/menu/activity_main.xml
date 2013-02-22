@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+  <item android:id="@+id/user_locations_title"
+          android:title="Created alerts" />
+  <item android:id="@+id/settings_title"
+          android:title="Preferences" />
+  <item android:id="@+id/exit_title"
+          android:title="Exit" />
+    
+</menu>

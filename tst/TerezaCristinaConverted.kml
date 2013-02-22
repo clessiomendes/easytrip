@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://earth.google.com/kml/2.2">
+<Document>
+   <name>GE2ADT</name>
+      <Placemark><name>0</name><description>GE2ADT Route</description><Point><coordinates>-43.98428,-19.94887,0</coordinates></Point></Placemark>
+      <Placemark><name>1</name><description>GE2ADT Route</description><Point><coordinates>-43.98476,-19.94851,0</coordinates></Point></Placemark>
+      <Placemark><name>2</name><description>GE2ADT Route</description><Point><coordinates>-43.98529,-19.94825,0</coordinates></Point></Placemark>
+      <Placemark><name>3</name><description>GE2ADT Route</description><Point><coordinates>-43.98646,-19.94798,0</coordinates></Point></Placemark>
+      <Placemark><name>4</name><description>GE2ADT Route</description><Point><coordinates>-43.98693,-19.94779,0</coordinates></Point></Placemark>
+      <Placemark><name>5</name><description>GE2ADT Route</description><Point><coordinates>-43.98729,-19.94742,0</coordinates></Point></Placemark>
+      <Placemark><name>6</name><description>GE2ADT Route</description><Point><coordinates>-43.98737,-19.94723,0</coordinates></Point></Placemark>
+      <Placemark><name>7</name><description>GE2ADT Route</description><Point><coordinates>-43.9874,-19.94679,0</coordinates></Point></Placemark>
+      <Placemark><name>8</name><description>GE2ADT Route</description><Point><coordinates>-43.98683,-19.94516,0</coordinates></Point></Placemark>
+      <Placemark><name>9</name><description>GE2ADT Route</description><Point><coordinates>-43.98681,-19.94457,0</coordinates></Point></Placemark>
+      <Placemark><name>10</name><description>GE2ADT Route</description><Point><coordinates>-43.98701,-19.94415,0</coordinates></Point></Placemark>
+      <Placemark><name>11</name><description>GE2ADT Route</description><Point><coordinates>-43.98795,-19.94316,0</coordinates></Point></Placemark>
+      <Placemark><name>12</name><description>GE2ADT Route</description><Point><coordinates>-43.98808,-19.94277,0</coordinates></Point></Placemark>
+      <Placemark><name>13</name><description>GE2ADT Route</description><Point><coordinates>-43.98807,-19.94248,0</coordinates></Point></Placemark>
+      <Placemark><name>14</name><description>GE2ADT Route</description><Point><coordinates>-43.98799,-19.94225,0</coordinates></Point></Placemark>
+      <Placemark><name>15</name><description>GE2ADT Route</description><Point><coordinates>-43.98782,-19.942,0</coordinates></Point></Placemark>
+      <Placemark><name>16</name><description>GE2ADT Route</description><Point><coordinates>-43.9867,-19.94112,0</coordinates></Point></Placemark>
+</Document>
+</kml>

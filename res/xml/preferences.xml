@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <CheckBoxPreference
+        android:key="@string/preferences_sound_alarm"
+        android:title="@string/sound_alarm_title"
+        android:defaultValue="true" />
+
+    <CheckBoxPreference
+        android:key="@string/preferences_beep"
+        android:title="@string/beep_title"
+        android:defaultValue="true" />
+
+    <CheckBoxPreference
+        android:key="@string/preferences_run_in_backgroud"
+        android:title="@string/run_in_backgroud_title"
+        android:defaultValue="true" />
+
+    <ListPreference
+        android:key="@string/preferences_gps_interval"
+        android:defaultValue="@string/gps_interval_default"
+        android:entries="@array/gps_interval"
+        android:entryValues="@array/gps_interval"
+        android:title="@string/gps_interval" />
+    
+    <ListPreference
+        android:key="@string/preferences_search_radius"
+        android:defaultValue="@string/search_radius_default"
+        android:entries="@array/search_radius"
+        android:entryValues="@array/search_radius"
+        android:title="@string/search_radius" />
+    
+    <CheckBoxPreference
+        android:key="@string/preferences_vibration_alarm"
+        android:title="@string/vibration_alarm_title"
+        android:defaultValue="true" />
+    
+    <org.open.easytrip.control.LocationTypesPreference
+        android:key="@string/preferences_location_types"
+        android:title="@string/location_types_to_be_warned" 
+        android:dialogIcon="@android:drawable/ic_dialog_alert" />
+    
+</PreferenceScreen>

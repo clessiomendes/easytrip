@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="gps_interval_default">1</string>
+    <string-array name="gps_interval">
+        <item>@string/gps_interval_default</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>7</item>
+        <item>10</item>
+    </string-array>
+    
+    <string name="search_radius_default">100</string>
+    <string-array name="search_radius">
+        <item>@string/search_radius_default</item>
+        <item>200</item>
+        <item>300</item>
+        <item>600</item>
+        <item>1000</item>
+    </string-array>
+
+    <string-array name="empty_array"/>
+
+</resources>
+

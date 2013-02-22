@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">EasyTrip</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="gps_interval">"GPS interval (s): "</string>
+    <string name="search_radius">"Search radius (m): "</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_save_location">Save alert</string>
+    <string name="settings_updated">Settings updated.</string>
+    <string name="error_loading_location_data_from_raw_file">Error loading location data from raw file.</string>
+    <string name="gps_provider_disabled">GPS provider disabled.</string>
+    <string name="gps_provider_enabled">GPS provider enabled.</string>
+    <string name="km_h">" km/h "</string>
+    <string name="no_fresh_location_available">No fresh location data available</string>
+    <string name="sound_alarm_title">Alarm with sound</string>
+    <string name="vibration_alarm_title">Alarm vibrating</string>
+    <string name="location_types_to_be_warned">Location types to be warned</string>
+    <string name="beep_title">Intermitent beep</string>
+    <string name="beep_summary">Beep to signal GPS is respondig</string>
+    <string name="run_in_backgroud_title">Run in background</string>
+    <string name="run_in_backgroud_summary">Try to keep running in backgroud</string>
+    
+    <plurals name="meters">
+        <item quantity="one">" meters"</item>
+        <item quantity="other">" meter"</item>
+    </plurals>
+
+    <string name="title_activity_user_locations">Alerts created by the user</string>
+
+    <string name="other">other:</string>
+
+    <string name="ok">OK</string>
+    
+    <string name="save">Save</string>
+
+    <string name="cancel">Cancel</string>
+
+    <string name="speed_limit">Speed limit</string>
+
+    <string name="delete">Delete</string>
+
+    <string name="confirm_remove_alert">The alert will be deleted. Confirm?</string>
+    
+    <string name="latitude_info">"Lat: %1$s"</string>
+    <string name="longitude_info">"Long: %1$s"</string>
+    <string name="bearing_info">&quot;Bearing: %1$s \u00B0&quot;</string>
+    <string name="directions_info">"Directions: %1$s"</string>
+<!--     <string name="reload_location_progress" formatted="false">"Importing alerts: %1$s\u0025 loaded"</string> -->
+    <string name="reload_location_progress" formatted="false">"Importing alerts: %1$s %% loaded"</string>
+    <string name="finished_importing_alerts">"Finished importing alerts. Total: %1$s"</string>
+
+</resources>

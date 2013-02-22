@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="org.open.easytrip"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="16" />
+
+    <!-- Application permission constraints: -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@android:style/Theme" >
+        <meta-data
+            android:name="developTimeFlag"
+            android:value="false" />
+
+        <activity
+            android:name="org.open.easytrip.control.MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="org.open.easytrip.control.SaveLocationActivity"
+            android:label="@string/title_activity_save_location" >
+        </activity>
+        <activity
+            android:name="org.open.easytrip.control.EasyTripPrefs"
+            android:label="Settings" >
+        </activity>
+        <activity
+            android:name="org.open.easytrip.control.UserLocationsActivity"
+            android:label="@string/title_activity_user_locations" >
+        </activity>
+
+        <service
+            android:name="org.open.easytrip.MainService"
+            android:enabled="true" >
+        </service>
+    </application>
+
+</manifest>

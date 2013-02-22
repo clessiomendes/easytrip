@@ -1,0 +1,16 @@
+Tasks:
+5) Internationalize all strings and messages within the app.
+9) Find other radar locations source, and international ones as well.
+12) All user messages should stay in activities to be externalized. No messages in BOs, DAOs, etc. 
+14) "amarelar" quando o GPS ficar mais de 2 x "intervalo de GPS" sem responder
+18) Remove run in background setting. Act like google navigator. Always keep running in background, except if the user explicitly exit. Leave a notification.
+19) Better sound alarms/beeps. Independent timer scheduler should do a better job.
+21) Open a dialog from the service to show alarms while running other apps 
+
+DONE:
+1) DAOs are not thread safe (BOs are, for now). Each DAO is implemented as a sigleton hosted by the 
+DAOFactory. Each DAO has an SQLiteDatabase db attribute which can be thread safe or not. If so, the 
+DAO can be assumed as thread safe.
+7) Implement database reload after an app version upgrade.
+10) Restaurar telas apos rotacionar
+17) Loading initial raw data file should be done through a DAO DP. 
