@@ -10,11 +10,12 @@ public class AlertBO extends AppBO {
 	/**
 	 * Callback interface to report the user of the alarm events. 
 	 */
-	public interface IUserInteraction {
+	public interface IGpsCallBack {
 		public void startVisualAlarm(int distance, int currentSpeed, LocationBean locationBean);
 		public void startSoundAlarm();
 		public void stopSoundAlarm();
 		public void stopVisualAlarm();
+		boolean isSoundAlarmActive();
 	}
 
 	/**
@@ -74,7 +75,7 @@ public class AlertBO extends AppBO {
 	 * Alarm incoming location, vibrating and showing its distance.
 	 * @return true if some location is found. False if none;
 	 */
-	public boolean checkLocations(IUserInteraction callback, GpsMovement gpsMovement, boolean supportsSpeed, boolean supportsBearing) {
+	public boolean checkLocations(IGpsCallBack callback, GpsMovement gpsMovement, boolean supportsSpeed, boolean supportsBearing) {
 		LocationBean closest = bos.getRetrieveLocationsBO().findClosestLocation(
 				gpsMovement.getLatitude(), gpsMovement.getLongitude(), IgnoreListHelper.getInstance(), 
 				supportsSpeed ? (int)gpsMovement.getSpeed() : null, supportsBearing ? (int)gpsMovement.getBearing() : null);
@@ -110,7 +111,7 @@ public class AlertBO extends AppBO {
 		}
 	}
 
-	public void forceStopAlarm(IUserInteraction callback) {
+	public void forceStopAlarm(IGpsCallBack callback) {
 		LocationBean lastLocationAlarmed = daos.getMemoryStorageDAO().getLastLocationAlarmed();
 		//This location will be ignored in the near future searches
 		if (lastLocationAlarmed != null)

@@ -32,12 +32,12 @@ public class AppDatabaseHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		BOFactory.getInstance().getDatabaseStructureBO().createDatabase();
+		BOFactory.getInstance().getDatabaseStructureBO().createDatabase(db);
 	}
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		BOFactory.getInstance().getDatabaseStructureBO().upgradeDatabase(oldVersion, newVersion);
+		BOFactory.getInstance().getDatabaseStructureBO().upgradeDatabase(oldVersion, newVersion, db);
 	}
 
 }

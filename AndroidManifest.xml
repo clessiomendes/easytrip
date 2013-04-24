@@ -44,11 +44,7 @@
             android:name="org.open.easytrip.control.UserLocationsActivity"
             android:label="@string/title_activity_user_locations" >
         </activity>
-
-        <service
-            android:name="org.open.easytrip.service.MainService"
-            android:enabled="true" >
-        </service>
+        
     </application>
 
 </manifest>

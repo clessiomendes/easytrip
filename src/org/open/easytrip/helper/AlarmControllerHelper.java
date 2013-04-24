@@ -1,11 +1,10 @@
 package org.open.easytrip.helper;
 
 import org.open.easytrip.R;
-import org.open.easytrip.dao.DAOFactory;
 import org.open.easytrip.exception.AppRuntimeException;
 
 import android.app.Activity;
-import android.content.Context;
+import android.app.Service;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.media.ToneGenerator;

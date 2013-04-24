@@ -9,21 +9,27 @@ import org.open.easytrip.AppConstants;
 import org.open.easytrip.AppUtils;
 import org.open.easytrip.R;
 import org.open.easytrip.bo.AlertBO;
+import org.open.easytrip.bo.AlertBO.IGpsCallBack;
 import org.open.easytrip.bo.BOFactory;
 import org.open.easytrip.bo.IImportLocationsBO;
 import org.open.easytrip.dao.DAOFactory;
+import org.open.easytrip.dao.DatabaseStructureDAO;
 import org.open.easytrip.entity.LocationBean;
 import org.open.easytrip.entity.ParcelableLocationBean;
 import org.open.easytrip.helper.AlarmControllerHelper;
+import org.open.easytrip.helper.AppDatabaseHelper;
 import org.open.easytrip.helper.IgnoreListHelper;
 import org.open.easytrip.service.MainService;
+import org.open.easytrip.service.MainService.LocalBinder;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Color;
@@ -31,11 +37,14 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.MediaPlayer.OnErrorListener;
 import android.media.SoundPool;
 import android.media.ToneGenerator;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.view.Menu;
@@ -48,16 +57,10 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
 public class MainActivity extends AppActivity {
-
-	
-	
-	
-	
 	
 //============================  L O C A L     F I E L D S  ==========================================================================
 	
 	private static final int NEW_LOCATION_REQUEST = 1;
-	private LocationBean lastLocationAlarmed;
 	private int showAliveDisplay= 0;
 	/**
 	 * Is bearing information provided by the GPS engine of the present device? Access through homonymous method. 
@@ -84,6 +87,23 @@ public class MainActivity extends AppActivity {
     
 //============================  N E S T E D      C L A S S E S  ==========================================================================
     
+    private MainService mainService;
+    /** Defines callbacks for service binding, passed to bindService() */
+    private final ServiceConnection mConnection = new ServiceConnection() {
+
+        @Override
+        public void onServiceConnected(ComponentName className,
+                IBinder service) {
+            // We've bound to LocalService, cast the IBinder and get LocalService instance
+            LocalBinder binder = (LocalBinder) service;
+            mainService = binder.getService();
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName arg0) {
+        }
+    };
+    
 	private final LocationListener myLocationListener = new MyLocationListener();
 	/**
 	 * Listen to GPS location changes.
@@ -91,7 +111,7 @@ public class MainActivity extends AppActivity {
 	private class MyLocationListener implements LocationListener {
 		public void onLocationChanged(Location location) {
 			showAlive(location);
-			bos.getAlertBO().checkLocations(alertCallback, AppUtils.convert(location), supportsSpeed(), supportsBearing());
+			bos.getAlertBO().checkLocations(gpsCallback, AppUtils.convert(location), supportsSpeed(), supportsBearing());
 		}
 		
 		public void onProviderDisabled(String provider){		}
@@ -101,15 +121,16 @@ public class MainActivity extends AppActivity {
 		public void onStatusChanged(String provider, int status, Bundle extras){		}
 	};
 
-	private AlertCallback alertCallback;
+	private IGpsCallBack gpsCallback;
 	/**
 	 * Alarm incoming location, vibrating and showing its distance.
 	 * @param distance In meters
 	 * @param currentSpeed In km/h
 	 * @param locationBean
 	 */
-	public class AlertCallback implements AlertBO.IUserInteraction {
-//	    final AlphaAnimation blinkingAnimator;
+	public class AlertCallback implements AlertBO.IGpsCallBack, OnErrorListener {
+		private static final float ALARM_VOLUME = 0.1f/*full volume = 1f*/;
+		//	    final AlphaAnimation blinkingAnimator;
 		private int stopSignal = 0;
 		private final SoundPool sounds;
 		private final int alarmIndex;
@@ -126,8 +147,13 @@ public class MainActivity extends AppActivity {
 
 			sounds = new SoundPool(1, AudioManager.STREAM_ALARM, 0);
 			alarmIndex = sounds.load(MainActivity.this, R.raw.alarm, 1);
-		    // Set the hardware buttons to control volume
-			MainActivity.this.setVolumeControlStream(AudioManager.STREAM_ALARM);
+			
+//			mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.alarm);
+//			mediaPlayer.setAudioStreamType(AudioManager.STREAM_ALARM);
+//			mediaPlayer.setLooping(true);
+//			mediaPlayer.setOnErrorListener(this);
+//			mediaPlayer.setVolume(0.3f, 0.3f);
+//			mediaPlayer.start();
 		}
 
 		@Override
@@ -166,7 +192,7 @@ public class MainActivity extends AppActivity {
 			soundAlarmActive = true ;
 //			((AudioManager)getSystemService(Context.AUDIO_SERVICE)).setStreamSolo(AudioManager.STREAM_NOTIFICATION, true);
 			((AudioManager)getSystemService(Context.AUDIO_SERVICE)).setStreamMute(AudioManager.STREAM_MUSIC, true);
-			stopSignal = sounds.play(alarmIndex, 1f/*full volume*/, 1f/*full volume*/, 1, -1/*loop forever*/, 1f);
+			stopSignal = sounds.play(alarmIndex, ALARM_VOLUME, ALARM_VOLUME, 1, -1/*loop forever*/, 1f);
 		}
 
 		@Override
@@ -177,8 +203,16 @@ public class MainActivity extends AppActivity {
 			((AudioManager)getSystemService(Context.AUDIO_SERVICE)).setStreamMute(AudioManager.STREAM_MUSIC, false);
 		}
 
+		@Override
 		public boolean isSoundAlarmActive() {
 			return soundAlarmActive;
+		}
+
+		@Override
+		public boolean onError(MediaPlayer mp, int what, int extra) {
+			// TODO Auto-generated method stub
+			mp.reset();
+			return false;
 		}
 	};
 	
@@ -319,6 +353,8 @@ public class MainActivity extends AppActivity {
 		
 		initializeListeners();
 		
+		initializeServices();
+		
 	    mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
 		final Object alreadyStarted = getLastNonConfigurationInstance();
@@ -336,12 +372,17 @@ public class MainActivity extends AppActivity {
 		}
 	}
 
+	private void initializeServices() {
+ 		final Intent intent = new Intent(this, MainService.class);
+		bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+	}
+
 	private void initializeListeners() {
 		//Listen for preference changes
 		PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(prefListener);
 		
 		//Turn GPS on
-		registerLocationUpdate();
+//		registerLocationUpdate();
 	}
 	
 /*
@@ -375,6 +416,9 @@ public class MainActivity extends AppActivity {
 	private void initializeScreen() {
 		setContentView(R.layout.activity_main);
 		
+	    // Set the hardware buttons to control volume
+		MainActivity.this.setVolumeControlStream(AudioManager.STREAM_ALARM);
+		
 		//Never turn the screen off
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
@@ -382,7 +426,7 @@ public class MainActivity extends AppActivity {
 		textView(R.id.txtMain).setBackgroundColor(Color.RED);
 		
 		//Callback instance must be created AFTER layout inflation
-		alertCallback = new AlertCallback();
+		gpsCallback = new AlertCallback();
 		
 		switch (getResources().getConfiguration().orientation) {
 		case Configuration.ORIENTATION_PORTRAIT:
@@ -400,6 +444,8 @@ public class MainActivity extends AppActivity {
 	 * Initialize the database, reloading locations in background, if necessary.
 	 */
 	private void initializeDatabase() {
+//		AppDatabaseHelper.getInstance(this).getWritableDatabase();
+//		DAOFactory.getInstance().getDatabaseStructureDAO().checkDatabase();
 		new ReloadLocationsTask().execute();
 	}
 	
@@ -457,7 +503,7 @@ public class MainActivity extends AppActivity {
 			blinkLED();
 
 		//Beep every once in a while
-		if (bos.getPreferencesBO().isBeep() && System.currentTimeMillis() - lastBeep >= BEEP_INTERVAL && ( !alertCallback.isSoundAlarmActive())) {
+		if (bos.getPreferencesBO().isBeep() && System.currentTimeMillis() - lastBeep >= BEEP_INTERVAL && ( !gpsCallback.isSoundAlarmActive())) {
 			beepTone.startTone(ToneGenerator.TONE_PROP_BEEP, 500);
 			lastBeep = System.currentTimeMillis();
 		}
@@ -497,17 +543,9 @@ public class MainActivity extends AppActivity {
 	 */
 	public void txtMainClick(View view)  
 	{
-		bos.getAlertBO().forceStopAlarm(alertCallback);
+		bos.getAlertBO().forceStopAlarm(gpsCallback);
 	}  
 
-	public void startService(View view) {
-		startService(new Intent(this, MainService.class));
-	}
-	
-	public void stopService(View view) {
-		stopService(new Intent(this, MainService.class));
-	}
-	
 	/**
 	 * OnClick event for btnUpdateSettings
 	 */

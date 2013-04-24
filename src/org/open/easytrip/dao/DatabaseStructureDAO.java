@@ -17,7 +17,7 @@ import android.util.Log;
 @org.open.easytrip.annotation.CheckLocationBean //Create upgrade method to add your field
 (longitude="",latitude="",id="", direction = "", directionType = "", speedLimit = "", type = "", userDefined = "", creation = "")
 public class DatabaseStructureDAO extends SQLiteDAO {
-
+	
 	@org.open.easytrip.annotation.CheckLocationBean
 	(longitude="",latitude="",id="", direction = "", directionType = "", speedLimit = "", type = "", userDefined = "", creation = "")
 	public void createDatabase() {

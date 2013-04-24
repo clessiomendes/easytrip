@@ -5,6 +5,7 @@ import org.open.easytrip.exception.AppRuntimeException;
 import org.open.easytrip.helper.AppDatabaseHelper;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.preference.PreferenceManager;
@@ -53,10 +54,16 @@ public class DAOFactory {
 	}
 	
 	DatabaseStructureDAO databaseStructureDAO;
-	public synchronized DatabaseStructureDAO getDatabaseStructureDAO() {
+	/**
+	 * Passing an SQLiteDatabase parameter is mandatory while dealing with the database structure. As the database is still in process of opening,
+	 * recurrent calls to getWritableDatabase will throw java.lang.IllegalStateException: getWritableDatabase called recursively 
+	 * @param newDb
+	 * @return
+	 */
+	public synchronized DatabaseStructureDAO getDatabaseStructureDAO(SQLiteDatabase newDb) {
 		if (databaseStructureDAO == null) {
 			databaseStructureDAO = new DatabaseStructureDAO();
-			databaseStructureDAO.setDatabase(AppDatabaseHelper.getInstance(context).getWritableDatabase());//Injects database connection
+			databaseStructureDAO.setDatabase(newDb);//Injects database connection
 		}
 		return databaseStructureDAO;
 	}

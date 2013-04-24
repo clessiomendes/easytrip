@@ -77,28 +77,28 @@ public final class R {
         public static final int music=0x7f050001;
     }
     public static final class string {
-        public static final int app_name=0x7f060015;
-        public static final int bearing_info=0x7f060033;
-        public static final int beep_summary=0x7f060026;
-        public static final int beep_title=0x7f060025;
-        public static final int cancel=0x7f06002d;
-        public static final int confirm_remove_alert=0x7f060030;
-        public static final int delete=0x7f06002f;
+        public static final int app_name=0x7f060014;
+        public static final int bearing_info=0x7f060032;
+        public static final int beep_summary=0x7f060025;
+        public static final int beep_title=0x7f060024;
+        public static final int cancel=0x7f06002c;
+        public static final int confirm_remove_alert=0x7f06002f;
+        public static final int delete=0x7f06002e;
         public static final int direction_type_all_directions=0x7f06000b;
         public static final int direction_type_both_directions=0x7f06000a;
         /**  DirectionTypeEnum 
          */
         public static final int direction_type_one_direction=0x7f060009;
-        public static final int directions_info=0x7f060034;
-        public static final int error_loading_location_data_from_raw_file=0x7f06001d;
-        public static final int finished_importing_alerts=0x7f060036;
-        public static final int gps_interval=0x7f060018;
+        public static final int directions_info=0x7f060033;
+        public static final int error_loading_location_data_from_raw_file=0x7f06001c;
+        public static final int finished_importing_alerts=0x7f060035;
+        public static final int gps_interval=0x7f060017;
         public static final int gps_interval_default=0x7f060000;
-        public static final int gps_provider_disabled=0x7f06001e;
-        public static final int gps_provider_enabled=0x7f06001f;
-        public static final int hello_world=0x7f06001a;
-        public static final int km_h=0x7f060020;
-        public static final int latitude_info=0x7f060031;
+        public static final int gps_provider_disabled=0x7f06001d;
+        public static final int gps_provider_enabled=0x7f06001e;
+        public static final int hello_world=0x7f060019;
+        public static final int km_h=0x7f06001f;
+        public static final int latitude_info=0x7f060030;
         /**  LocationTypeEnum     
          */
         public static final int location_type_fixed_speed_camera=0x7f060002;
@@ -108,38 +108,37 @@ public final class R {
         public static final int location_type_relocatable_speed_camera=0x7f060005;
         public static final int location_type_speed_bump=0x7f060007;
         public static final int location_type_traffic_light_speed_camera=0x7f060004;
-        public static final int location_types_to_be_warned=0x7f060024;
-        public static final int locationthers=0x7f06000c;
-        public static final int longitude_info=0x7f060032;
-        public static final int menu_settings=0x7f060016;
-        public static final int no_fresh_location_available=0x7f060021;
-        public static final int ok=0x7f06002b;
-        public static final int other=0x7f06002a;
-        public static final int preferences_beep=0x7f060012;
-        public static final int preferences_gps_interval=0x7f06000f;
-        public static final int preferences_location_types=0x7f060011;
-        public static final int preferences_run_in_backgroud=0x7f060013;
-        public static final int preferences_search_radius=0x7f060010;
+        public static final int location_types_to_be_warned=0x7f060023;
+        public static final int longitude_info=0x7f060031;
+        public static final int menu_settings=0x7f060015;
+        public static final int no_fresh_location_available=0x7f060020;
+        public static final int ok=0x7f06002a;
+        public static final int other=0x7f060029;
+        public static final int preferences_beep=0x7f060011;
+        public static final int preferences_gps_interval=0x7f06000e;
+        public static final int preferences_location_types=0x7f060010;
+        public static final int preferences_run_in_backgroud=0x7f060012;
+        public static final int preferences_search_radius=0x7f06000f;
         /**   ============= ATENTION! These resources must not be translated. ==============  
          */
-        public static final int preferences_sound_alarm=0x7f06000d;
-        public static final int preferences_vibration_alarm=0x7f06000e;
+        public static final int preferences_sound_alarm=0x7f06000c;
+        public static final int preferences_vibration_alarm=0x7f06000d;
         /**      <string name="reload_location_progress" formatted="false">"Importing alerts: %1$s\u0025 loaded"</string> 
          */
-        public static final int reload_location_progress=0x7f060035;
-        public static final int run_in_backgroud_summary=0x7f060028;
-        public static final int run_in_backgroud_title=0x7f060027;
-        public static final int save=0x7f06002c;
-        public static final int search_radius=0x7f060019;
+        public static final int reload_location_progress=0x7f060034;
+        public static final int run_in_backgroud_summary=0x7f060027;
+        public static final int run_in_backgroud_title=0x7f060026;
+        public static final int save=0x7f06002b;
+        public static final int search_radius=0x7f060018;
         public static final int search_radius_default=0x7f060001;
-        public static final int settings_updated=0x7f06001c;
-        public static final int shared_preferences_las_import_file_size=0x7f060014;
-        public static final int sound_alarm_title=0x7f060022;
-        public static final int speed_limit=0x7f06002e;
-        public static final int title_activity_main=0x7f060017;
-        public static final int title_activity_save_location=0x7f06001b;
-        public static final int title_activity_user_locations=0x7f060029;
-        public static final int vibration_alarm_title=0x7f060023;
+        public static final int settings_updated=0x7f06001b;
+        public static final int shared_preferences_las_import_file_size=0x7f060013;
+        public static final int sound_alarm_title=0x7f060021;
+        public static final int speed_limit=0x7f06002d;
+        public static final int title_activity_main=0x7f060016;
+        public static final int title_activity_save_location=0x7f06001a;
+        public static final int title_activity_user_locations=0x7f060028;
+        public static final int vibration_alarm_title=0x7f060022;
     }
     public static final class style {
         /** 
