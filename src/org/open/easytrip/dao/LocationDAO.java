@@ -31,8 +31,8 @@ public class LocationDAO extends SQLiteDAO {
 	/**
 	 * Used in "create table" sql statements
 	 */
-	public static final String ALL_FIELDS_DEFINITIOS = " id, latitude, longitude , type , speedLimit , directionType , "+
-				"direction, userDefined, creation ";
+	public static final String ALL_FIELDS_DEFINITIOS = " id INTEGER PRIMARY KEY, latitude REAL, longitude REAL, type INTEGER, speedLimit INTEGER, directionType INTEGER, "+
+				"direction INTEGER, userDefined INTEGER, creation DATETIME";
 
 	/**
 	 * Select all locations within range. Important! Only id, latitude and longitude attributes are populated by now. 
@@ -45,23 +45,16 @@ public class LocationDAO extends SQLiteDAO {
 				Double.toString( minLongitude ),
 				Double.toString( maxLongitude )
 		};
-		Cursor resultSet = db.rawQuery("select "+ALL_FIELDS+" from locations where latitude > ? and latitude < ? and longitude > ? and longitude < ?", arguments);
-		LocationBean[] result = new LocationBean[resultSet.getCount()];
+		Cursor resultSet = db.rawQuery("select "+ALL_FIELDS+" from locations where latitude > ? and latitude < ? and longitude > ? and longitude < ?", arguments); //resultSet = db.rawQuery("select "+ALL_FIELDS+" from locations", new String[] {} );
+//		Cursor resultSet = db.rawQuery("select "+ALL_FIELDS+" from locations where latitude > "+arguments[0]+" and latitude < "+arguments[1]+" and longitude > "+arguments[2]+" and longitude < "+arguments[3],  new String[] {});
+
+		LocationBean[] result = new LocationBean[resultSet.getCount()];  //resultSet = db.rawQuery("select "+ALL_FIELDS+" from locations where latitude > -30 and latitude < -5  and longitude > -80 and longitude < -10", new String[] {} );
 		try {
-			
 			int i=0;
-//			int field;
 			while (resultSet.moveToNext()) {
-//				LocationBean location = new LocationBean();
-//				location.setId(resultSet.getInt(field=0));
-//				location.setLatitude(resultSet.getDouble(++field));
-//				location.setLongitude(resultSet.getDouble(++field));
-//				location.setType(LocationTypeEnum.valueOf(resultSet.getInt(++field)));
-//				location.setDirection(resultSet.getInt(++field));
 				result[i++] = populateOneInstance(resultSet); 
 			}
 			return result;
-			
 		} finally {
 			if (resultSet != null)
 				resultSet.close();

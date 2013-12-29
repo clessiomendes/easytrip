@@ -166,9 +166,7 @@ public class SaveLocationActivity extends AppActivity {
 		toast(returnMsg);
 
 		//Returns the created location with the generated id
-		setResult(RESULT_OK,
-				new Intent().
-				putExtra("location", new ParcelableLocationBean(userDefinedLocation)));
+		setResult(RESULT_OK, new Intent().putExtra("location", new ParcelableLocationBean(userDefinedLocation)));
 
 		finish();
 	}  

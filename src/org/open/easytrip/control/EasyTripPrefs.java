@@ -3,6 +3,7 @@ package org.open.easytrip.control;
 import org.open.easytrip.R;
 
 import android.annotation.TargetApi;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.MultiSelectListPreference;
 import android.preference.Preference;
@@ -15,16 +16,18 @@ public class EasyTripPrefs extends PreferenceActivity {
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.preferences);
 		
-		MultiSelectListPreference m = new MultiSelectListPreference(this);
-		m.setKey("preferences_location_types");
-		m.setTitle("Events to be alarmed");
-		Object o = null;
-		m.setDefaultValue(o);
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			MultiSelectListPreference m = new MultiSelectListPreference(this);
+			m.setKey("preferences_location_types");
+			m.setTitle("Events to be alarmed");
+			Object o = null;
+			m.setDefaultValue(o);
 
-		CharSequence[] entries = { "Dark grey", "Light grey", "Light red", "Red" };
-		CharSequence[] entryValues = { "#4c4c4c", "#b5b5b5", "#ab6a68", "#962622" };
-		m.setEntries(entries);
-		m.setEntryValues(entryValues);
+			CharSequence[] entries = { "Dark grey", "Light grey", "Light red", "Red" };
+			CharSequence[] entryValues = { "#4c4c4c", "#b5b5b5", "#ab6a68", "#962622" };
+			m.setEntries(entries);
+			m.setEntryValues(entryValues);
+		}
 	}
 	
 //	@Override

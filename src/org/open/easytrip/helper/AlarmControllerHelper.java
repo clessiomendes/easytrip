@@ -48,12 +48,12 @@ public class AlarmControllerHelper {
 	/**
 	 * Can not be explicitly created.
 	 */
-	private AlarmControllerHelper(Activity context) {
+	private AlarmControllerHelper(Service context) {
 		sounds = new SoundPool(2, AudioManager.STREAM_MUSIC, 0);
 		alarmIndex = sounds.load(context, R.raw.alarm, 1);
 //		aliveIndex = sounds.load(context, R.raw.alive, 1);
 	    // Set the hardware buttons to control the music
-	    context.setVolumeControlStream(AudioManager.STREAM_MUSIC);
+//	    context.setVolumeControlStream(AudioManager.STREAM_MUSIC);
 	    alarming = false;
 	    blinkingAnimator = new AlphaAnimation(1.0f, 0.0f);
 	    blinkingAnimator.setDuration(ALARM_DURATION); //You can manage the time of the blink with this parameter
@@ -66,7 +66,7 @@ public class AlarmControllerHelper {
 	/**
 	 * Initializes the factory injecting the database connection.
 	 */
-	public static void init(Activity context) {
+	public static void init(Service context) {
 		if (instance != null)
 			return;
 		instance = new AlarmControllerHelper(context);

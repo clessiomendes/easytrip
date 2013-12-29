@@ -60,6 +60,15 @@
                 android:textColor="@color/white"
                 android:textSize="20sp" />
 
+            <TextView
+                android:id="@+id/txtCurrentStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="Current status"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
             <Button
                 android:id="@+id/btnNewlocation"
                 android:layout_width="wrap_content"

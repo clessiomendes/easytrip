@@ -13,12 +13,22 @@ import org.open.easytrip.helper.IgnoreListHelper;
 
 
 public class RetrieveLocationsBO extends AppBO {
+
+	/* => Angles to be used as parameters to ignore radars that are not in our range or that don't cover the same direction in which we are driving */
+	private static final int MAX_DIRECTION_DIFF_TO_ALARM = 90/*degrees*/;
+	private static final double ANGLE_RANGE_AHEAD = Math.toRadians(90/*degrees*/); //180 means we have to check for every radar in the semi-plane in front of me. 90 means only half of this semi-plane.
+	/* <= */
 	
-	private static final int MAX_DIRECTION_DIFF_TO_ALARM = 135;
-	public static final int OPPOSITE_DIRECTION_RANGE = 90/*degrees*/;
-	public static final double POSITION_EQUALITY = AppUtils.meters2degrees(5);
+	/* => Parameters to be used to check whether two locations should be interpreted as beeing the same */
+	private static final int OPPOSITE_DIRECTION_RANGE = 90/*degrees*/; 
+	private static final double POSITION_EQUALITY = AppUtils.meters2degrees(5);
+	/* <= */
+
+	/* => Parameters to be used to calculate the range (a circular area) around the car to search for alarms */
 	private static final int TIME_BEFORE_ALERT = 15 /*seconds*/;
-//	private static final int CONVERSION_FACTOR = (int)(TIME_BEFORE_ALERT * 3.6); /*from m/s to km/h*/
+	private static final int MINIMUM_DISTANCE_TO_SEARCH_FOR_ALARMS = 100 /*meters*/;
+	private static final int MAXIMUM_DISTANCE_TO_SEARCH_FOR_ALARMS = 1000 /*meters*/;
+	/* <= */
 
 	/**
 	 * Search the storage for the closest location from a given point, inside a scope radius, ignoring opposite directions.
@@ -40,7 +50,7 @@ public class RetrieveLocationsBO extends AppBO {
 		//searchRadius is now defined by the current speed
 		int searchRadius = currentSpeed * TIME_BEFORE_ALERT;
 		//Never shorter than 100m or longer then 1000m
-		searchRadius = searchRadius < 100 ? 100 : searchRadius > 1000 ? 1000 : searchRadius;
+		searchRadius = searchRadius < MINIMUM_DISTANCE_TO_SEARCH_FOR_ALARMS ? MINIMUM_DISTANCE_TO_SEARCH_FOR_ALARMS : searchRadius > MAXIMUM_DISTANCE_TO_SEARCH_FOR_ALARMS ? MAXIMUM_DISTANCE_TO_SEARCH_FOR_ALARMS : searchRadius;
 		
 		List<LocationTypeEnum> typesToSearch = bos.getPreferencesBO().getWarningTypes(); 
 		
@@ -63,15 +73,59 @@ public class RetrieveLocationsBO extends AppBO {
 			//Skip locations types marked not to be warned
 			if (! typesToSearch.contains(location.getType()))
 				continue;
-			
-			//Skip locations out of direction (when direction infos are present and location is unidirectional)
+
+			//Skip locations whose direction doesn't match the driver's direction (when direction infos are present and location is unidirectional)
 			if (currentDirection != null && location.getDirection() != null && 
 					location.getDirectionType() != null && location.getDirectionType().equals(DirectionTypeEnum.ONE_DIRECTION) 
-					&& AppUtils.absDirectionDiff(currentDirection, location.getDirection()) > MAX_DIRECTION_DIFF_TO_ALARM )
-				continue;
+					&& AppUtils.absDirectionDiffDegrees(currentDirection, location.getDirection()) > MAX_DIRECTION_DIFF_TO_ALARM ) {
+				if (! bos.getPreferencesBO().isIgnoreDiretion())  
+					continue;
+			}
+			
+			{//Skip locations that are not within range
+
+				/* Longitude corresponds to X coordinate in the earth plan. Latitude to Y. 
+				 * North is direction zero, east = 90, south = 180 and west = 270
+				 * (x0,y0) -> my current position. (x,y) -> the radar position.
+				 *  v -> vetor que vai da coordenada atual ate o radar sendo pesquisado
+				 *  Devemos comparar mi com a direcao atual para ver se a localizacao sendo pesquisada esta a frente 
+				 *  gama -> direcao em que estou me deslocando (em relacao ao eixo norte), em radianos.
+				 *  mi -> angulo do vetor v em relacao ao eixo norte que passa pela coordenada atual, em radianos.
+				 */
+
+				double x0 = currentLongitude; double y0 = currentLatitude;
+				double x = location.getLongitude(); double y = location.getLatitude();
+				double gama = Math.toRadians(currentDirection);
+				double mi = (Math.abs(y-y0) > 0.00000001) /*check for zero division*/ ? Math.atan((x - x0)/(y - y0)) : x>x0 ? Math.PI/2 : - Math.PI/2;
+				
+				//Math.atan((y - y0) / (x - x0))            Math.toDegrees(Math.atan(-1)+2*Math.PI)
+				//Math.atan2((y - y0) , (x - x0))           Math.toDegrees(1.53)
+				
+				/* Check the correct quadrant in Cartesian plan based on the greater longitude
+				 * A funcao Math.atan (arcotangente) tem seu contra-dominio entre os angulos -pi/2 e +pi/2. Logo, precisamos reavaliar o
+				 * quadrante do angulo mi com base nas coordenadas (x,y) em relacao a (x0,y0).
+				 */
+				
+				if (y >= y0) // quadrants 1 and 4
+					; //mi is correct
+				else //(y < y0) quadrants 2 and 3
+					mi = mi + (Math.PI); //mi must be dislocated pi radians ahead
+
+				//We are interested in mi between [ 0 and 2*pi [
+				while (mi < 0) 
+					mi = mi + 2*Math.PI;
+				while (mi >= 2*Math.PI) 
+					mi = mi - 2*Math.PI;
+				
+				//Testing the absolute distance between both angles (my direction and the direction to the radar)
+				if (AppUtils.absDirectionDiffRadians(mi, gama) > ANGLE_RANGE_AHEAD/2) {
+					location.setOutOfRange(true);
+					if (! bos.getPreferencesBO().isIgnoreRange())
+						continue;   //AppUtils.absDirectionDiffDegrees(268, 139) > Math.PI/2
+				}
+			}
 				
 			double thisDistance = AppUtils.distance(currentLatitude, currentLongitude, location.getLatitude(), location.getLongitude());
-			//TODO consider directions
 			if (AppUtils.degrees2meters(thisDistance) < shortestDistance) {
 				closest = locationDAO.getLocation(location.getId());
 				//Transient, used to show a percent to target info

@@ -14,6 +14,9 @@ import org.open.easytrip.exception.AppRuntimeException;
 
 import android.util.Log;
 
+/**
+ * Used for IGO8, Amigo and Primo file structures
+ */
 public class IgoImportLocationsBO extends AppBO implements IImportLocationsBO {
 
 	/**

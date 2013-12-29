@@ -33,7 +33,7 @@ public class DatabaseStructureDAO extends SQLiteDAO {
 	 * New field "userDefined" on table locations
 	 */
 	public void upgradeTo4() {
-		db.execSQL("ALTER TABLE locations ADD COLUMN userDefined INT;");
+		db.execSQL("ALTER TABLE locations ADD COLUMN userDefined INTEGER;");
 		db.execSQL("update locations set userDefined = "+YesOrNoEnum.NO.intValue);
 	}
 	

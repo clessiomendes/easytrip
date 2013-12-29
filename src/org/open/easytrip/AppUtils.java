@@ -86,7 +86,8 @@ public abstract class AppUtils {
 	}
 	
 	public static double distance(double currentLatitude, double currentLongitude, double compareLatitude, double compareLongitude) {
-		return Math.sqrt(Math.pow(currentLatitude - compareLatitude,2) + Math.pow(currentLongitude - compareLongitude,2));
+		return Math.hypot(currentLongitude - compareLongitude, currentLatitude - compareLatitude);
+//		return Math.sqrt(Math.pow(currentLatitude - compareLatitude,2) + Math.pow(currentLongitude - compareLongitude,2));
 	}
 	
 	public static boolean isDevelopmentTime() {
@@ -108,9 +109,20 @@ public abstract class AppUtils {
 //		return "(strftime('%s', "+fieldName+", 'unixepoch') * 1000) AS "+fieldName;
 	}
 
-	public static int absDirectionDiff(int a, int b) {
+	/**
+	 * The absolute difference between two angles, considering 360 == 0  
+	 */
+	public static int absDirectionDiffDegrees(int a, int b) {
 //		ABS(180 - ABS(180- ABS(A - B))) 
 		return Math.abs(180 - Math.abs(180 - Math.abs(a - b)));
+	}
+	
+	/**
+	 * The absolute difference between two angles, considering 360 == 0  
+	 */
+	public static double absDirectionDiffRadians(double a, double b) {
+//		ABS(180 - ABS(180- ABS(A - B))) 
+		return Math.abs(Math.PI - Math.abs(Math.PI - Math.abs(a - b)));
 	}
 
 	/**

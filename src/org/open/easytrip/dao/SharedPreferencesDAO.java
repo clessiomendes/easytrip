@@ -88,4 +88,14 @@ public class SharedPreferencesDAO extends AppDAO {
 		edit.commit();
 	}
 
+	public boolean isIgnoreDiretion() {
+		String key = resources.getString(R.string.preferences_ignore_diretion);
+		return sharedPreferences.getBoolean(key, true);
+	}
+
+	public boolean isIgnoreRange() {
+		String key = resources.getString(R.string.preferences_ignore_range);
+		return sharedPreferences.getBoolean(key, true);
+	}
+
 }	

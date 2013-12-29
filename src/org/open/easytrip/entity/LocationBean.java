@@ -16,6 +16,8 @@ public class LocationBean {
 	private YesOrNoEnum userDefined;
 	private Date creation;
 	private Integer searchRadius;
+	private Boolean outOfRange;
+	private Boolean outOfDirection;
 	/* ==============================>  IMPORTANT!  <================================= 
 	 * Any new non-transient attribute should be added to CheckLocationBean annotation to point out
 	 * which part of the code must be updated in consequence of new attributes. */
@@ -113,6 +115,22 @@ public class LocationBean {
 	
 	public void setSearchRadius(Integer searchRadius) {
 		this.searchRadius = searchRadius;
+	}
+
+	public Boolean getOutOfRange() {
+		return outOfRange;
+	}
+
+	public void setOutOfRange(Boolean outOfRange) {
+		this.outOfRange = outOfRange;
+	}
+
+	public Boolean getOutOfDirection() {
+		return outOfDirection;
+	}
+
+	public void setOutOfDirection(Boolean outOfDirection) {
+		this.outOfDirection = outOfDirection;
 	}
 	
 }

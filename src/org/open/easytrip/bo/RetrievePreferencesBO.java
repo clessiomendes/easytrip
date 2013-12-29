@@ -70,5 +70,23 @@ public class RetrievePreferencesBO extends AppBO {
 	public List<LocationTypeEnum> getWarningTypes() {
 		return daos.getSharedPreferencesDAO().getWarningTypes();
 	}
+
+	/**
+	 * The app should consider if the direction of the radar/location and the agent are compatible? Setting to false will cause alerts to be
+	 * emitted for radars on the opposite side of the road. 
+	 * @return
+	 */
+	public boolean isIgnoreDiretion() {
+		return daos.getSharedPreferencesDAO().isIgnoreDiretion();
+	}
+
+	/**
+	 * The app should consider if the radar/location is in front of the agent? Setting to false will cause alerts to keep signaling even after
+	 * the radar/location already passed on the road
+	 * @return
+	 */
+	public boolean isIgnoreRange() {
+		return daos.getSharedPreferencesDAO().isIgnoreRange();
+	}
 	
 }

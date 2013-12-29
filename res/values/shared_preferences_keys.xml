@@ -11,5 +11,6 @@
     <string name="preferences_beep">preferences_beep</string>
     <string name="preferences_run_in_backgroud">preferences_run_in_backgroud</string>
     <string name="shared_preferences_las_import_file_size">shared_preferences_las_import_file_size</string>
-
+    <string name="preferences_ignore_diretion">preferences_ignore_diretion</string>
+    <string name="preferences_ignore_range">preferences_ignore_range</string>
 </resources>

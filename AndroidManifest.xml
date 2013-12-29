@@ -11,6 +11,7 @@
 
     <!-- Application permission constraints: -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.VIBRATE" />
 
@@ -44,7 +45,19 @@
             android:name="org.open.easytrip.control.UserLocationsActivity"
             android:label="@string/title_activity_user_locations" >
         </activity>
+
+        <service
+            android:name="org.open.easytrip.service.MainService"
+            android:enabled="true" >
+        </service>
         
+<!-- Declaring broadcast receiver for BOOT_COMPLETED event -->
+        <!--receiver android:name="org.open.easytrip.EasyTripReceiver" android:enabled="true" android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver-->
+                
     </application>
 
 </manifest>
