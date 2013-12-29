@@ -119,7 +119,7 @@ public class RetrieveLocationsBO extends AppBO {
 				
 				//Testing the absolute distance between both angles (my direction and the direction to the radar)
 				if (AppUtils.absDirectionDiffRadians(mi, gama) > ANGLE_RANGE_AHEAD/2) {
-					location.setOutOfRange(true);
+					location.setOutOfRange(AppUtils.absDirectionDiffRadians(mi, gama));
 					if (! bos.getPreferencesBO().isIgnoreRange())
 						continue;   //AppUtils.absDirectionDiffDegrees(268, 139) > Math.PI/2
 				}

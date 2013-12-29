@@ -12,6 +12,7 @@ import org.open.easytrip.bo.AlertBO.IGpsCallBack;
 import org.open.easytrip.bo.BOFactory;
 import org.open.easytrip.bo.IImportLocationsBO;
 import org.open.easytrip.dao.DAOFactory;
+import org.open.easytrip.entity.GpsMovement;
 import org.open.easytrip.entity.LocationBean;
 import org.open.easytrip.helper.AlarmControllerHelper;
 
@@ -45,7 +46,7 @@ import android.widget.Toast;
 
 public class MainService extends AppService {
 	
-	private boolean mockGPS = false;
+	private boolean mockGPS = true;
 
 	private Timer statusTimer;
 	private Date lastGPSUpdate = new Date(); /*Let's pretend GPS is updated at start*/
@@ -179,10 +180,10 @@ public class MainService extends AppService {
 		}
 
 		@Override
-		public void startVisualAlarm(int distance, int currentSpeed, LocationBean locationBean) {
+		public void startVisualAlarm(int distance, GpsMovement gpsMovement, LocationBean location) {
 			//Progress bar must be updated always
-			if (locationBean.getSearchRadius() != null)
-				showCrossedDistanceInActivity(distance, locationBean.getSearchRadius());
+			if (location.getSearchRadius() != null)
+				showCrossedDistanceInActivity(distance, location.getSearchRadius());
 			
 			//Alarm already being shown. No need to restart blinking.
 //			if (visualAlarmActive)
@@ -192,7 +193,11 @@ public class MainService extends AppService {
 			//			TextView txtUserMessage = textView(R.id.txtUserMessage);
 			//			txtUserMessage.setText(txtUserMessage.getText()+" - "+distanceMeters+getQuantityString(R.plurals.meters, distanceMeters));  
 			
-			updateActivity(R.id.txtMain, locationBean.getSpeedLimit() != null ? ""+locationBean.getSpeedLimit(): "0");
+			updateActivity(R.id.txtMain, location.getSpeedLimit() != null ? ""+location.getSpeedLimit(): "0");
+			String messageShouldIgnore = "";
+			messageShouldIgnore += location.getOutOfDirection() ? "Is out of direction (me:"+gpsMovement.getBearing()+", location:"+location.getDirection()+"). " : "";
+			messageShouldIgnore += location.getOutOfRange()!=null ? "Is out of range ("+Math.toDegrees(location.getOutOfRange())+"º). " : "";
+			updateActivity(R.id.txtMessageLocationDetails, messageShouldIgnore);
 			
 			//		AlarmControllerHelper.getInstance().alarm(txtMain, withSound, withVibration, (Vibrator)getSystemService(Context.VIBRATOR_SERVICE));
 		}
@@ -201,6 +206,7 @@ public class MainService extends AppService {
 		public void stopVisualAlarm() {
 //			visualAlarmActive = false;
 			updateActivity(R.id.txtMain, null);
+			updateActivity(R.id.txtMessageLocationDetails, null);
 			hideCrossedDistanceInActivity();
 		}
 		

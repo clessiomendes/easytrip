@@ -1,5 +1,7 @@
 package org.open.easytrip.entity;
 
+import org.open.easytrip.AppUtils;
+
 public class GpsMovement {
 	private float bearing;
 	private float speed;
@@ -13,8 +15,11 @@ public class GpsMovement {
 	public void setBearing(float bearing) {
 		this.bearing = bearing;
 	}
-	public float getSpeed() {
+	public float getSpeedMs() {
 		return speed;
+	}
+	public float getSpeedKh() {
+		return AppUtils.ms2Kmh(speed);
 	}
 	public void setSpeed(float speed) {
 		this.speed = speed;

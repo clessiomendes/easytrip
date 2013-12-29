@@ -113,15 +113,13 @@ public abstract class AppUtils {
 	 * The absolute difference between two angles, considering 360 == 0  
 	 */
 	public static int absDirectionDiffDegrees(int a, int b) {
-//		ABS(180 - ABS(180- ABS(A - B))) 
 		return Math.abs(180 - Math.abs(180 - Math.abs(a - b)));
 	}
 	
 	/**
-	 * The absolute difference between two angles, considering 360 == 0  
+	 * The absolute difference between two angles, considering 2pi == 0  
 	 */
 	public static double absDirectionDiffRadians(double a, double b) {
-//		ABS(180 - ABS(180- ABS(A - B))) 
 		return Math.abs(Math.PI - Math.abs(Math.PI - Math.abs(a - b)));
 	}
 
